@@ -1,24 +1,21 @@
 {
   "name": "use-trailing-async",
-  "private": true,
   "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "code:check": "run-s -c -n code:check:**",
-    "code:check:tsc": "tsc --noEmit",
-    "code:check:eslint": "npm run s:eslint",
-    "code:check:prettier": "npm run s:prettier -- --check",
-    "code:fix": "run-s -c -n code:fix:**",
-    "code:fix:eslint": "npm run s:eslint -- --fix",
-    "code:fix:prettier": "npm run s:prettier -- --write",
-    "s:eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
-    "s:prettier": "prettier \"**/*.{js,jsx,ts,tsx,json,html,md,mdx,yml}\""
+  "description": "React hook for managing async calls ensuring the latest call is always processed after the current one completes.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/balintbrews/use-trailing-async.git"
   },
+  "author": "Bálint Kléri (https://balintbrews.com)",
+  "bugs": "https://github.com/balintbrews/use-trailing-async/issues",
+  "homepage": "https://github.com/balintbrews/use-trailing-async#readme",
+  "keywords": [
+    "react",
+    "hook",
+    "async"
+  ],
+  "type": "module",
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
@@ -45,5 +42,21 @@
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1",
     "vitest": "^3.1.2"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "code:check": "run-s -c -n code:check:**",
+    "code:check:tsc": "tsc --noEmit",
+    "code:check:eslint": "npm run s:eslint",
+    "code:check:prettier": "npm run s:prettier -- --check",
+    "code:fix": "run-s -c -n code:fix:**",
+    "code:fix:eslint": "npm run s:eslint -- --fix",
+    "code:fix:prettier": "npm run s:prettier -- --write",
+    "s:eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "s:prettier": "prettier \"**/*.{js,jsx,ts,tsx,json,html,md,mdx,yml}\""
   }
 }

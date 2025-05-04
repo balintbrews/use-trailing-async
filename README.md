@@ -1,4 +1,4 @@
-# useTrailingAsync
+# `use-trailing-async`
 
 A lightweight React hook for handling async operations with trailing behavior.
 It executes the initial async function call immediately and captures any
