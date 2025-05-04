@@ -1,0 +1,17 @@
+{
+  "printWidth": 80,
+  "proseWrap": "always",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^react$",
+    "<THIRD_PARTY_MODULES>",
+    "<TYPES>^(react)",
+    "<TYPES>",
+    "",
+    "^[.]",
+    "<TYPES>^[.]"
+  ]
+}
