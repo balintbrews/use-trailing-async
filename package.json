@@ -1,6 +1,6 @@
 {
   "name": "use-trailing-async",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "React hook for managing async calls ensuring the latest call is always processed after the current one completes.",
   "license": "MIT",
   "repository": {
@@ -27,6 +27,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.22.0",
     "eslint-plugin-react-dom": "^1.48.5",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -42,6 +43,11 @@
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1",
     "vitest": "^3.1.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
   "scripts": {
     "dev": "vite",
