@@ -1,6 +1,6 @@
 {
   "name": "use-trailing-async",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "React hook for managing async calls ensuring the latest call is always processed after the current one completes.",
   "license": "MIT",
   "repository": {
