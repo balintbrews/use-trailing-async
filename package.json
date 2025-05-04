@@ -16,6 +16,17 @@
     "async"
   ],
   "type": "module",
+  "main": "./dist/use-trailing-async.umd.js",
+  "module": "./dist/use-trailing-async.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/use-trailing-async.es.js",
+      "require": "./dist/use-trailing-async.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": ">=18.0.0",
     "react-dom": ">=18.0.0"
