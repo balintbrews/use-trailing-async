@@ -1,54 +1,81 @@
-# React + TypeScript + Vite
+# useTrailingAsync
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight React hook for handling async operations with trailing behavior.
+It executes the initial async function call immediately and captures any
+subsequent calls during execution, automatically running only the most recent
+call once the current operation finishes.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install use-trailing-async
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```tsx
+import useTrailingAsync from 'use-trailing-async';
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+function ExampleSearchComponent() {
+  const { execute, isProcessing, error, result } =
+    useTrailingAsync(fetchSearchResults);
+
+  const handleSearch = (query) => {
+    execute(query); // Only the latest call will complete if triggered in succession
+  };
+
+  return (
+    <div>
+      <input onChange={(e) => handleSearch(e.target.value)} />
+      {isProcessing && <div>Loading...</div>}
+      {error && <div>Error: {error.message}</div>}
+      {result && <div>Results: {JSON.stringify(result)}</div>}
+    </div>
+  );
+}
 ```
+
+## API
+
+```typescript
+function useTrailingAsync<T, A extends unknown[]>(
+  asyncFn: (...args: A) => Promise<T>,
+): {
+  execute: (...args: A) => Promise<T | undefined>;
+  isProcessing: boolean;
+  error: Error | null;
+  result: T | null;
+};
+```
+
+### Parameters
+
+- `asyncFn`: The async function to execute
+
+### Return Values
+
+- `execute`: Function to trigger the async operation
+- `isProcessing`: Boolean indicating if an async operation is in progress
+- `error`: Error object if the async operation failed, or `null`
+- `result`: The result of the successful async operation, or `null`
+
+## How It Works
+
+When multiple calls to `execute()` happen while an async operation is in
+progress:
+
+1. The first call executes immediately
+2. Subsequent calls are tracked but not executed right away
+3. If multiple pending calls accumulate, only the most recent one will execute
+   when the current operation finishes
+4. Intermediate calls are skipped entirely
+
+This is particularly useful for:
+
+- Search inputs with rapid typing
+- Form submissions with quick multiple clicks
+- Any UI interaction where only the latest user intent matters
+
+## License
+
+MIT
